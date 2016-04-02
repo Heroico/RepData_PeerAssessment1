@@ -144,9 +144,22 @@ However, the daily mean does indeed raise a small fraction.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
+The last rubric requires to analyze differences between weekdays and weekends.
+
+
+```r
+#make it locale invariant!
+Sys.setlocale("LC_TIME","C")
+```
 
 ```
 ## [1] "C"
+```
+
+```r
+weekdays <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+curated_data$date <- as.Date(curated_data$date)
+curated_data$week_day <- factor((weekdays(curated_data$date) %in% weekdays), levels=c(FALSE, TRUE), labels=c('weekend','weekday'))
 ```
 
 For the grand finale of this analysis, I will segregate the data into a 
@@ -175,4 +188,4 @@ plot(interval_time_series, weekend_time_series, type="l")
 ![](PA1_template_files/figure-html/weekend vs weekday-1.png)
 
 As can be seend from the plot, on a weekday activity is likely to begin earlier than in the weekends.
-However, activity is in general at a higher level during the weekend
+However, activity is in general at a more even level during the weekend.
